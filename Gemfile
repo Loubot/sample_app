@@ -35,3 +35,7 @@ end
 group :production do
   gem 'pg', '0.12.2'
 end
+
+group :production, :staging do
+  gem 'rails_12factor'
+end
