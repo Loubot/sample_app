@@ -46,7 +46,7 @@ describe "User pages" do
           expect { click_link('delete') }.to change(User, :count).by(-1)
         end
         
-        describe "submit a delete request to Users#destroy action" do
+        describe "should redirect to users page if suicide is attempted by admin" do
           before { delete user_path(admin) }
           specify { response.should redirect_to(users_path) }
         end
