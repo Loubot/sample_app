@@ -45,6 +45,16 @@ describe "User pages" do
         it "should be able to delete another user" do
           expect { click_link('delete') }.to change(User, :count).by(-1)
         end
+        
+        describe "submit a delete request to Users#destroy action" do
+          before { delete user_path(admin) }
+          specify { response.should redirect_to(users_path) }
+        end
+
+        describe "check that admin wasn't deleted" do
+          before { visit user_path(admin) }
+          it { should have_selector('title', text: admin.name) }
+        end
         it { should_not have_link('delete', href: user_path(admin)) }
       end
     end
@@ -95,7 +105,7 @@ describe "User pages" do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
         fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Confirm Password", with: "foobar"
       end
 
       describe "after saving the user" do
