@@ -27,7 +27,7 @@ describe "Authentication" do
       end
     end
 
-  	describe "with valid information" do
+    describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       before { sign_in user }
 
@@ -44,21 +44,13 @@ describe "Authentication" do
         before { click_link "Sign out" }
         it { should have_link('Sign in') }
       end
-  	end
+    end
   end
 
   describe "authorization" do
 
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
-
-      describe "when visiting user page" do
-        before { visit user_path(user) }
-      end
-
-      describe "it should not have settings link" do
-        it { should_not have_link('Settings', href: edit_user_path(user)) }
-      end
 
       describe "when attempting to visit a protected page" do
         before do
@@ -71,7 +63,6 @@ describe "Authentication" do
         describe "after signing in" do
           it "should render the desired protected page" do
             page.should have_selector('title', text: "Edit user")
-            page.should have_link('Settings', href: edit_user_path(user)) }
           end
         end
       end
@@ -123,5 +114,4 @@ describe "Authentication" do
       end
     end
   end
-
 end
