@@ -28,7 +28,7 @@ describe "Home page" do
   end
   describe "after creating multiple posts" do
   	before(:all) 	{ 40.times { FactoryGirl.create(:micropost, user: admin, content: "bla") } }
-  	after(:all) 	{ User.find_by_id(1).microposts.delete_all }
+  	after(:all) 	{ admin.microposts.delete_all }
   	before { visit root_path }
 
   	it "should have pagination" do  		
