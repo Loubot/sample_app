@@ -27,9 +27,15 @@ describe "Home page" do
   	end
   end
   describe "after creating multiple posts" do
+<<<<<<< HEAD
     before(:all)  { 40.times { FactoryGirl.create(:micropost, user: admin, content: "bla") } }
     after(:all)   { admin.microposts.delete_all }
     before { visit root_path }
+=======
+  	before(:all) 	{ 40.times { FactoryGirl.create(:micropost, user: admin, content: "bla") } }
+  	after(:all) 	{ admin.microposts.delete_all }
+  	before { visit root_path }
+>>>>>>> following-users
 
     it "should have pagination" do      
       page.should have_selector('div.pagination')
