@@ -37,7 +37,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page])
+    if params[:search]
+      foundUsers = User.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
+      @users = foundUsers.paginate(:page => params[:page], :per_page => 30)
+    else
+      @users = User.paginate(page: params[:page])
+    end
   end
 
   def update
