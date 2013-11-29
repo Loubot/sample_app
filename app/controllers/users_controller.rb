@@ -38,8 +38,7 @@ class UsersController < ApplicationController
 
   def index
     if params[:search]
-      foundUsers = User.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
-      @users = foundUsers.paginate(:page => params[:page])
+      @users = User.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"]).paginate(page: params[:page])      
     else
       @users = User.paginate(page: params[:page])
     end
