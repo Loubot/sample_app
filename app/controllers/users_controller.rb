@@ -39,9 +39,15 @@ class UsersController < ApplicationController
 
   def index
     if params[:search]
-      @users = User.paginate :per_page => 30, :page =>params[:page],
+      searchedUsers = User.paginate :per_page => 30, :page =>params[:page],
                              :conditions => ['name LIKE ?', "%#{params[:search]}%"],
                              :order => 'name'
+        if searchedUsers == []
+          flash.now[:error] = "User not found"
+          @users = searchedUsers
+        else
+          @users = searchedUsers
+        end
       
     else
       @users = User.paginate(page: params[:page])
