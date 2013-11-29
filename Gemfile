@@ -14,6 +14,8 @@ gem 'will_paginate', '3.0.3'
 
 gem 'bootstrap-will_paginate', '0.0.6'
 
+gem 'mail', '2.5.4'
+
 group :development, :test do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.11.0'
