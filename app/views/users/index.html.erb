@@ -9,7 +9,12 @@
 <%= will_paginate %>
 
 <ul class="users">
-  <%= render @users %>
+  <% if @users == [] %>
+  	<%= render 'no_results_found' %>
+  <% else %>
+  	<%= render @users %>
+  <% end %>
 </ul>
+
 
 <%= will_paginate %>
