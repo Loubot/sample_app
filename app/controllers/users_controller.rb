@@ -3,6 +3,7 @@ class UsersController < ApplicationController
                             only: [:index, :edit, :update, :destroy, :following, :followers]
   before_filter :correct_user,    only: [:edit, :update]
   before_filter :admin_user,      only: :destroy
+  
 
   def show
     @user = User.find(params[:id])
@@ -38,7 +39,10 @@ class UsersController < ApplicationController
 
   def index
     if params[:search]
-      @users = User.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"]).paginate(page: params[:page])      
+      @users = User.paginate :per_page => 30, :page =>params[:page],
+                             :conditions => ['name LIKE ?', "%#{params[:search]}%"],
+                             :order => 'name'
+      
     else
       @users = User.paginate(page: params[:page])
     end
